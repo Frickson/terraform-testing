@@ -141,6 +141,6 @@ resource "aws_iam_role_policy" "codepipeline_policy" {
   policy = data.aws_iam_policy_document.codepipeline_policy.json
 }
 
-data "aws_kms_alias" "s3kmskey" {
+/* data "aws_kms_alias" "s3kmskey" {
   name = "alias/myKmsKey"
-}
+} */
