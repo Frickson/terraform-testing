@@ -13,6 +13,20 @@ resource "aws_codepipeline_webhook" "github" {
   }
 }
 
+resource "github_repository_webhook" "bar" {
+  repository = github_repository.repo.name
+
+  name = "web"
+
+  configuration {
+    url          = aws_codepipeline_webhook.bar.url
+    content_type = "json"
+    insecure_ssl = true
+    secret       = "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"
+  }
+
+  events = ["push"]
+}
 
 resource "aws_codepipeline" "codepipeline" {
   name     = "tf-test-pipeline"
@@ -34,8 +48,8 @@ resource "aws_codepipeline" "codepipeline" {
     action {
       name             = "Source"
       category         = "Source"
-      owner            = "AWS"
-      provider         = "CodeStarSourceConnection"
+      owner            = "ThirdParty"
+      provider         = "GitHub"
       version          = "1"
       output_artifacts = ["source_output"]
 
