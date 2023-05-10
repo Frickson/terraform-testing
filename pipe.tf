@@ -14,7 +14,6 @@ resource "aws_codepipeline_webhook" "github" {
 }
 
 
-
 resource "aws_codepipeline" "codepipeline" {
   name     = "tf-test-pipeline"
   role_arn = aws_iam_role.codepipeline_role.arn
@@ -43,7 +42,7 @@ resource "aws_codepipeline" "codepipeline" {
       configuration = {
         ConnectionArn    = aws_codepipeline_webhook.github.arn
         FullRepositoryId = "Frickson/nec.msbu.chatbot.source"
-        BranchName       = "main"
+        BranchName       = "master"
       }
     }
   }
