@@ -14,12 +14,12 @@ resource "aws_codepipeline_webhook" "github" {
 }
 
 resource "github_repository_webhook" "bar" {
-  repository = github_repository.repo.name
+  repository = "Frickson/nec.msbu.chatbot.source"
 
   name = "web"
 
   configuration {
-    url          = "Frickson/nec.msbu.chatbot.source"
+    url          = aws_codepipeline_webhook.github.url
     content_type = "json"
     insecure_ssl = true
     secret       = "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"
