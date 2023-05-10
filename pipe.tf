@@ -7,7 +7,10 @@ resource "aws_codepipeline_webhook" "github" {
   authentication_configuration {
     secret_token = "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"
   }
-
+  filter {
+    json_path    = "$.ref"
+    match_equals = "refs/heads/{Branch}"
+  }
   target_configuration {
     repository_name = "Frickson/nec.msbu.chatbot.source"
     branch_name     = "master"
