@@ -11,10 +11,6 @@ resource "aws_codepipeline_webhook" "github" {
     json_path    = "$.ref"
     match_equals = "refs/heads/{Branch}"
   }
-  target_configuration {
-    repository_name = "Frickson/nec.msbu.chatbot.source"
-    branch_name     = "master"
-  }
 }
 
 
