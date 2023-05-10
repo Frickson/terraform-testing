@@ -16,8 +16,6 @@ resource "aws_codepipeline_webhook" "github" {
 resource "github_repository_webhook" "bar" {
   repository = "Frickson/nec.msbu.chatbot.source"
 
-  name = "web"
-
   configuration {
     url          = aws_codepipeline_webhook.github.url
     content_type = "json"
