@@ -19,7 +19,7 @@ resource "github_repository_webhook" "bar" {
   name = "web"
 
   configuration {
-    url          = aws_codepipeline_webhook.bar.url
+    url          = "Frickson/nec.msbu.chatbot.source"
     content_type = "json"
     insecure_ssl = true
     secret       = "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"
