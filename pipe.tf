@@ -1,9 +1,147 @@
-module "codepipeline" {
-  source         = "JamesWoolfenden/codepipeline/aws"
-  version        = "0.4.21"
-  artifact_store = var.artifact_store
-  common_tags    = var.common_tags
-  description    = var.description
-  name           = var.name
-  stages         = var.stages
+resource "aws_codepipeline_webhook" "github" {
+  name            = "github-webhook"
+  authentication  = "GITHUB_HMAC"
+  target_action   = "Source"
+  target_pipeline = "tf-test-pipeline"
+
+  authentication_configuration {
+    secret_token = "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"
+  }
+
+  target_configuration {
+    repository_name = "Frickson/nec.msbu.chatbot.source"
+    branch_name     = "master"
+  }
+}
+
+
+
+resource "aws_codepipeline" "codepipeline" {
+  name     = "tf-test-pipeline"
+  role_arn = aws_iam_role.codepipeline_role.arn
+
+  artifact_store {
+    location = aws_s3_bucket.codepipeline_bucket.bucket
+    type     = "S3"
+
+    /* encryption_key {
+      id   = data.aws_kms_alias.s3kmskey.arn
+      type = "KMS"
+    } */
+  }
+
+  stage {
+    name = "Source"
+
+    action {
+      name             = "Source"
+      category         = "Source"
+      owner            = "AWS"
+      provider         = "CodeStarSourceConnection"
+      version          = "1"
+      output_artifacts = ["source_output"]
+
+      configuration = {
+        ConnectionArn    = aws_codepipeline_webhook.github.arn
+        FullRepositoryId = "Frickson/nec.msbu.chatbot.source"
+        BranchName       = "main"
+      }
+    }
+  }
+
+  stage {
+    name = "Build"
+
+    action {
+      name             = "Build"
+      category         = "Build"
+      owner            = "AWS"
+      provider         = "CodeBuild"
+      input_artifacts  = ["source_output"]
+      output_artifacts = ["build_output"]
+      version          = "1"
+
+      configuration = {
+        ProjectName = "build1"
+      }
+    }
+  }
+}
+
+resource "aws_codestarconnections_connection" "example" {
+  name          = "example-connection"
+  provider_type = "GitHub"
+}
+
+resource "aws_s3_bucket" "codepipeline_bucket" {
+  bucket = "test-bucket"
+}
+
+resource "aws_s3_bucket_acl" "codepipeline_bucket_acl" {
+  bucket = aws_s3_bucket.codepipeline_bucket.id
+  acl    = "private"
+}
+
+data "aws_iam_policy_document" "assume_role" {
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "Service"
+      identifiers = ["codepipeline.amazonaws.com"]
+    }
+
+    actions = ["sts:AssumeRole"]
+  }
+}
+
+resource "aws_iam_role" "codepipeline_role" {
+  name               = "test-role"
+  assume_role_policy = data.aws_iam_policy_document.assume_role.json
+}
+
+data "aws_iam_policy_document" "codepipeline_policy" {
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "s3:GetObject",
+      "s3:GetObjectVersion",
+      "s3:GetBucketVersioning",
+      "s3:PutObjectAcl",
+      "s3:PutObject",
+    ]
+
+    resources = [
+      aws_s3_bucket.codepipeline_bucket.arn,
+      "${aws_s3_bucket.codepipeline_bucket.arn}/*"
+    ]
+  }
+
+  statement {
+    effect    = "Allow"
+    actions   = ["codestar-connections:UseConnection"]
+    resources = [aws_codestarconnections_connection.example.arn]
+  }
+
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "codebuild:BatchGetBuilds",
+      "codebuild:StartBuild",
+    ]
+
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_role_policy" "codepipeline_policy" {
+  name   = "codepipeline_policy"
+  role   = aws_iam_role.codepipeline_role.id
+  policy = data.aws_iam_policy_document.codepipeline_policy.json
+}
+
+data "aws_kms_alias" "s3kmskey" {
+  name = "alias/myKmsKey"
 }
