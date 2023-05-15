@@ -8,7 +8,7 @@ data "aws_secretsmanager_secret_version" "secret-version" {
 
 module "build" {
   for_each = var.codebuild
-  source = "github.com/nec-msbu-devops/terraform_module"
+  source = "github.com/nec-msbu-devops/chatbot-aws-codebuild"
   name                = each.value.name
   #build_image         = var.build_image
   #build_compute_type  = var.build_compute_type

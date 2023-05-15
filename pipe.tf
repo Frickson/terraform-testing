@@ -1,6 +1,6 @@
 
 module "codepipeline" {
-  source = "github.com/rpstreef/terraform-aws-codepipeline?ref=v1.0"
+  source = "github.com/nec-msbu-devops/chatbot-aws-codepipeline"
 
   resource_tag_name = var.resource_tag_name
   environment       = var.environment
