@@ -79,7 +79,7 @@ resource "aws_codepipeline" "codepipeline" {
 }
 
 resource "aws_codestarconnections_connection" "example" {
-  name          = "example-connection"
+  name          = "chatbot_github"
   provider_type = "GitHub"
 }
 

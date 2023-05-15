@@ -1,4 +1,4 @@
-locals {
+variable "chatbot_codebuild" {
   codebuild = {
     "snyk_container_scanning" = {
       name          = "build1"
