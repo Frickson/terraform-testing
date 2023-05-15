@@ -83,3 +83,9 @@ variable "domain_cache_settings" {
   type        = string
   default     = "true"
 }
+
+variable "codepipeline_module_enabled" {
+  type        = bool
+  description = "(Optional) Whether to create resources within the module or not. Default is true."
+  default     = true
+}
