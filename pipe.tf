@@ -1,7 +1,6 @@
 
 module "codepipeline" {
   source = "github.com/nec-msbu-devops/chatbot-aws-codepipeline"
-
   resource_tag_name = var.resource_tag_name
   environment       = var.environment
   region            = var.region

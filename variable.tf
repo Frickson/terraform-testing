@@ -37,3 +37,49 @@ variable "codebuild" {
     }
   }
 }
+
+variable "environment" {
+  type        = string
+  description = "AWS resource environment/prefix"
+  default = "dev"
+}
+
+variable "region" {
+  type        = string
+  description = "AWS region"
+  default = "ap-southeast-1"
+}
+
+variable "resource_tag_name" {
+  type        = string
+  description = "Resource tag name for cost tracking"
+  default = "nothing"
+}
+
+variable "git_owner" {
+  type        = string
+  description = "Github username"
+  default = "frickson"
+}
+
+variable "git_repo" {
+  type        = string
+  description = "Github repository name"
+  default = "https://github.com/nec-msbu-devops/chatbot.git"
+}
+
+variable "git_branch" {
+  type        = string
+  description = "Github branch name"
+  default     = "master"
+}
+
+variable "domain_name" {
+  type        = string
+  default     = "test.com"
+}
+
+variable "domain_cache_settings" {
+  type        = string
+  default     = "true"
+}
