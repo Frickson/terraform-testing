@@ -65,7 +65,7 @@ variable "git_owner" {
 variable "git_repo" {
   type        = string
   description = "Github repository name"
-  default = "https://github.com/nec-msbu-devops/chatbot.git"
+  default = "chatbot"
 }
 
 variable "git_branch" {
