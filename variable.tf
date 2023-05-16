@@ -71,12 +71,12 @@ variable "git_repo" {
 variable "git_branch" {
   type        = string
   description = "Github branch name"
-  default     = "master"
+  default     = "main"
 }
 
 variable "domain_name" {
   type        = string
-  default     = "test.com"
+  default     = "chatbot"
 }
 
 variable "domain_cache_settings" {
