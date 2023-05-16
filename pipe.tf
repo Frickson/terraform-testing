@@ -15,9 +15,6 @@ module "codepipeline" {
   git_owner        = var.git_owner
   git_repo         = var.git_repo
   git_branch       = var.git_branch
-  
-  build_image = "aws/codebuild/standard:4.0"
-  buildspec   = data.template_file.buildspec.rendered
 
   s3_deploy_bucket_arn = local.s3_deployment_bucket_arn
 
