@@ -1,3 +1,8 @@
+variable "domain_name" {
+  default = "chatbot"
+  type = string
+}
+
 variable "codepipeline" {
   type = map(object({
     environment        = string
@@ -5,7 +10,6 @@ variable "codepipeline" {
     git_owner          = string
     git_repo           = string
     git_branch         = string
-    domain_name        = string
     codepipeline_module_enabled = bool
   }))
   default = {
@@ -15,7 +19,6 @@ variable "codepipeline" {
       git_owner            = "Frickson"
       git_repo             = "test"
       git_branch           = "main"
-      domain_name          = "chatbot"
       codepipeline_module_enabled = true
     },
     "pipe2" = {
@@ -24,7 +27,6 @@ variable "codepipeline" {
       git_owner            = "Frickson"
       git_repo             = "webserver"
       git_branch           = "main"
-      domain_name          = "chatbot"
       codepipeline_module_enabled = true
     }
   }
