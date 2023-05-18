@@ -6,15 +6,16 @@ data "aws_secretsmanager_secret_version" "secret-version" {
   secret_id = data.aws_secretsmanager_secret.by-arn.id
 }
 
+resource "aws_codestarconnections_connection" "_" {
+  name          = var.codestar_connection_name
+  provider_type = var.git_provider_type
+}
+
 module "build" {
   for_each = var.codebuild
   source = "github.com/nec-msbu-devops/chatbot-aws-codebuild"
   name                = each.value.name
-  #build_image         = var.build_image
-  #build_compute_type  = var.build_compute_type
-  #build_timeout       = var.build_timeout 
   private_repository  = true
-  #source_credential_token = "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"
   source_credential_token = jsondecode(data.aws_secretsmanager_secret_version.secret-version.secret_string)["chatbot_github_token"]
   source_type         = "GITHUB"
   source_location     = "https://github.com/nec-msbu-devops/chatbot.git"

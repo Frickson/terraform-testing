@@ -34,6 +34,26 @@ variable "codebuild" {
       cache_type    = "NO_CACHE"
       local_cache_modes = []
       environment_variables = {}
+    },
+    "git-credentials-check" = {
+      name          = "build4"
+      buildspec     = "chatbot/buildspecs/buildspec-gitsecrets.yml"
+      privileged_mode = true
+      cache_type    = "LOCAL"
+      local_cache_modes = ["LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE"]
+      environment_variables = {}
     }
   }
 }
+
+variable "codestar_connection_name" {
+  type = string
+  default = "devops_github_to_chatbot"
+}
+
+variable "git_provider_type" {
+  description = "Codestar connections support; GitHub, Bitbucket"
+  default = "GitHub"
+}
+#add secret cloudpose
+#add 
