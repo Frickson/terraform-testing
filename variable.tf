@@ -58,12 +58,6 @@ variable "git_provider_type" {
 
 variable "extra_permissions" {
   type        = list(any)
-  default     = [
-                  "s3:PutObject",
-                  "s3:GetObject",
-                  "s3:GetObjectVersion",
-                  "s3:GetBucketAcl",
-                  "s3:GetBucketLocation"
-                ]
+  default     = []
   description = "List of action strings which will be added to IAM service account permissions."
 }
