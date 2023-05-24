@@ -1,3 +1,9 @@
+data "aws_caller_identity" "default" {}
+
+locals {
+  aws_account_id = data.aws_caller_identity.default.account_id
+  aws_root_account_arn = data.aws_caller_identity.current.arn + "root"
+}
 data "aws_secretsmanager_secret" "by-arn" {
   arn = "arn:aws:secretsmanager:ap-southeast-1:925016504071:secret:chatbot_github_token-pBcvSV"
 }
@@ -10,6 +16,8 @@ resource "aws_codestarconnections_connection" "_" {
   name          = var.codestar_connection_name
   provider_type = var.git_provider_type
 }
+
+
 
 module "build" {
   for_each = var.codebuild
@@ -31,4 +39,49 @@ module "build" {
 output "example" {
   value = jsondecode(data.aws_secretsmanager_secret_version.secret-version.secret_string)["chatbot_github_token"]
   sensitive = true
+}
+
+resource "aws_iam_role" "default" {
+  name                  = "EKS_assume_role_created_from_terraform_by_kx"
+  assume_role_policy    = data.aws_iam_policy_document.role.json
+  force_detach_policies = true
+  path                  = var.iam_role_path
+  permissions_boundary  = var.iam_permissions_boundary
+
+}
+
+data "aws_iam_policy_document" "role" {
+  statement {
+    sid = ""
+
+    actions = [
+      "sts:AssumeRole",
+    ]
+
+    principals {
+      type        = "AWS"
+      identifiers = [local.aws_root_account_arn]
+    }
+
+    effect = "Allow"
+  }
+}
+
+data "aws_iam_policy_document" "policy" {
+  statement {
+    effect    = "Allow"
+    actions   = ["eks:Describe*"]
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_policy" "policy" {
+  name        = "test-policy"
+  description = "A test policy"
+  policy      = data.aws_iam_policy_document.policy.json
+}
+
+resource "aws_iam_role_policy_attachment" "test-attach" {
+  role       = aws_iam_role.default.name
+  policy_arn = aws_iam_policy.policy.arn
 }

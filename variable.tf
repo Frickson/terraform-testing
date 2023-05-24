@@ -15,7 +15,7 @@ variable "codebuild" {
       cache_type    = "LOCAL"
       local_cache_modes = ["LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE"]
       environment_variables = {
-        "KEY1" = "VALUE1"
+        "KEY1" = "VALUE1" 
         "KEY2" = "VALUE2"
       }
     },
