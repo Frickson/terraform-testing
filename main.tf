@@ -39,10 +39,6 @@ module "build" {
 resource "aws_iam_role" "default" {
   name                  = "EKS_assume_role_created_from_terraform_by_kx"
   assume_role_policy    = data.aws_iam_policy_document.role.json
-  force_detach_policies = true
-  path                  = var.iam_role_path
-  permissions_boundary  = var.iam_permissions_boundary
-
 }
 
 data "aws_iam_policy_document" "role" {
