@@ -7,15 +7,7 @@ output "example" {
     sensitive = true
 }
 
-
-
-
-
-
-
-
-
-
-output "role_arn" {
-    value = module.build.role_arn
+output "role_id" {
+  description = "IAM Role ID"
+  value       = module.build.role_id
 }
