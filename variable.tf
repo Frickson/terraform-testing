@@ -71,7 +71,7 @@ variable "extra_permissions" {
 }
 
 variable "parameters" {
-  default = [
+  default = {
     {
       name  = "foo"
       type  = "String"
@@ -83,5 +83,5 @@ variable "parameters" {
       value = "example"
     },
     # Add more parameters as needed
-  ]
+  }
 }
