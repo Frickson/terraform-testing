@@ -42,6 +42,14 @@ variable "codebuild" {
       cache_type    = "LOCAL"
       local_cache_modes = ["LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE"]
       environment_variables = {}
+    },
+    "deploy_to_stag" = {
+      name          = "build5"
+      buildspec     = "chatbot/buildspecs/buildspec-stag.yml"
+      privileged_mode = true
+      cache_type    = "LOCAL"
+      local_cache_modes = ["LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE"]
+      environment_variables = {}
     }
   }
 }
