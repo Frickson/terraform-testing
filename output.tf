@@ -10,7 +10,3 @@ output "example" {
 output "role_arn" {
     value = module.build.role_arn
 }
-
-output "role_id" {
-    value = module.build.role_id
-}
