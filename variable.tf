@@ -87,7 +87,7 @@ variable "parameters" {
 }
 
 variable "parameters-1" {
-  type = map(object({
+  type = list(object({
     name  = string
     type  = string
     value = string
