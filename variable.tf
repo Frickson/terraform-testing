@@ -87,7 +87,7 @@ variable "parameters" {
 }
 
 variable "parameters-1" {
-  type = list(object({
+  type = map(object({
     name  = string
     type  = string
     value = string
@@ -102,7 +102,28 @@ variable "parameters-1" {
       name  = "another_parameter1"
       type  = "String"
       value = "example"
-    },
+    }
     # Add more parameters as needed
   ]
+}
+
+variable "parameters-2" {
+  type = map(object({
+    name  = string
+    type  = string
+    value = string
+  }))
+  default = {
+    "test1" = {
+      name  = "foo2"
+      type  = "String"
+      value = "bar"
+    },
+    "test2" = {
+      name  = "another_parameter2"
+      type  = "String"
+      value = "example"
+    }
+    # Add more parameters as needed
+  }
 }
