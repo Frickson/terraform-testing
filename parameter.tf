@@ -1,13 +1,13 @@
 locals {
-  names = [
+  params_names = [
     for index in var.parameters:
       index.name
   ]
-  types = [
+  params_types = [
     for index in var.parameters:
       index.type
   ]
-  values = [
+  params_values = [
     for index in var.parameters:
       index.value
   ]
@@ -16,7 +16,7 @@ locals {
 
 resource "aws_ssm_parameter" "params" {
     count = length(var.parameters)
-    name = local.names[count.index]
-    type = local.types[count.index]
-    value = local.values[count.index]
+    name = local.params_names[count.index]
+    type = local.params_types[count.index]
+    value = local.params_values[count.index]
 }
