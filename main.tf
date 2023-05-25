@@ -75,8 +75,8 @@ data "aws_iam_policy_document" "policy" {
 }
 
 resource "aws_iam_policy" "policy" {
-  name        = "test-policy"
-  description = "A test policy"
+  name        = "eks_describe_from_terraform"
+  description = "Allow describe EKS"
   policy      = data.aws_iam_policy_document.policy.json
 }
 
