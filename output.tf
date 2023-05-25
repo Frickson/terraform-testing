@@ -9,7 +9,7 @@ output "example" {
 
 output "role_arn" {
   description = "IAM Role ARN"
-  value       = module.codebuild[*].role_arn
+  value       = module.codebuild[0].role_arn
 
 }
 
