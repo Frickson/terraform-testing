@@ -1,6 +1,22 @@
+locals {
+  names = [
+    for index in var.parameters:
+      index.name
+  ]
+  types = [
+    for index in var.parameters:
+      index.type
+  ]
+  values = [
+    for index in var.parameters:
+      index.value
+  ]
+
+}
+
 resource "aws_ssm_parameter" "params" {
-    foreach = var.parameters
-    name  = each.value.name
-    type  = each.value.type
-    value = each.value.value
+    count = length(var.parameters)
+    name = local.names[count.index]
+    type = local.types[count.index]
+    value = local.values[count.index]
 }
