@@ -69,3 +69,19 @@ variable "extra_permissions" {
   default     = []
   description = "List of action strings which will be added to IAM service account permissions."
 }
+
+variable "parameters" {
+  default = [
+    {
+      name  = "foo"
+      type  = "String"
+      value = "bar"
+    },
+    {
+      name  = "another_parameter"
+      type  = "String"
+      value = "example"
+    },
+    # Add more parameters as needed
+  ]
+}
