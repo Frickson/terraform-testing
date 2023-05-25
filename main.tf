@@ -2,7 +2,7 @@ data "aws_caller_identity" "default" {}
 
 locals {
   aws_account_id = data.aws_caller_identity.default.account_id
-  aws_root_account_arn = data.aws_caller_identity.default.arn + ":root"
+  aws_root_account_arn = format(data.aws_caller_identity.default.arn%s, ":root")
 }
 data "aws_secretsmanager_secret" "by-arn" {
   arn = "arn:aws:secretsmanager:ap-southeast-1:925016504071:secret:chatbot_github_token-pBcvSV"
