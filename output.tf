@@ -8,5 +8,5 @@ output "example" {
 }
 
 output "role_arn" {
-    value = module.build.role_arn
+    value = module.build.role_arn[0]
 }
