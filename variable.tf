@@ -85,3 +85,24 @@ variable "parameters" {
     # Add more parameters as needed
   ]
 }
+
+variable "parameters-1" {
+  type = list(object({
+    name  = string
+    type  = string
+    value = string
+  }))
+  default = [
+    {
+      name  = "foo1"
+      type  = "String"
+      value = "bar"
+    },
+    {
+      name  = "another_parameter1"
+      type  = "String"
+      value = "example"
+    },
+    # Add more parameters as needed
+  ]
+}
