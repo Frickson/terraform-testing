@@ -79,3 +79,24 @@ resource "aws_iam_role_policy_attachment" "test-attach" {
   role       = aws_iam_role.default.name
   policy_arn = aws_iam_policy.policy.arn
 }
+
+data "aws_iam_policy_document" "assume_role_eks" {
+  statement {
+    effect    = "Allow"
+    actions   = ["sts:AssumeRole"]
+    resources = ["arn:aws:iam::925016504071:role/EKS_assume_role_created_from_terraform_by_kx"]
+  }
+}
+
+resource "aws_iam_policy" "assume_role_eks_policy" {
+  name        = "sts_assume_eks_deploy_role_${module.this.id}"
+  description = "A policy to assume role given by specific account to deploy resouces on their account"
+  policy      = data.aws_iam_policy_document.assume_role_eks.json
+}
+
+resource "aws_iam_role_policy_attachment" "assume_role_eks_attach" {
+  count = length(module.build)
+  policy_arn = aws_iam_policy.assume_role_eks_policy.arn
+  role = index(module.codebuild[*].role_arn, count.index)
+}
+
