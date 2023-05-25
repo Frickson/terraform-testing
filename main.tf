@@ -95,7 +95,7 @@ resource "aws_iam_policy" "assume_role_eks_policy" {
 }
 
 resource "aws_iam_role_policy_attachment" "assume_role_eks_attach" {
-  count = length(module.build)
+  count = length(module.codebuild)
   policy_arn = aws_iam_policy.assume_role_eks_policy.arn
   role = index(module.codebuild[*].role_arn, count.index)
 }
