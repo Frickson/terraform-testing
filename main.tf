@@ -18,7 +18,7 @@ resource "aws_codestarconnections_connection" "_" {
 }
 
 
-module "build" {
+module "codebuild" {
   for_each = var.codebuild
   source = "github.com/nec-msbu-devops/chatbot-aws-codebuild"
   name                = each.value.name
