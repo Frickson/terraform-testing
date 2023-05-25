@@ -18,7 +18,6 @@ resource "aws_codestarconnections_connection" "_" {
 }
 
 
-
 module "build" {
   for_each = var.codebuild
   source = "github.com/nec-msbu-devops/chatbot-aws-codebuild"
@@ -37,7 +36,7 @@ module "build" {
 }
 
 
-/* resource "aws_iam_role" "default" {
+resource "aws_iam_role" "default" {
   name                  = "EKS_assume_role_created_from_terraform_by_kx"
   assume_role_policy    = data.aws_iam_policy_document.role.json
   force_detach_policies = true
@@ -55,7 +54,11 @@ data "aws_iam_policy_document" "role" {
 
     principals {
       type        = "AWS"
-      identifiers = [local.aws_root_account_arn]
+      identifiers = ["arn:aws:iam::${local.aws_account_id}:root"]
+    }
+    principals {
+      type        = "Service"
+      identifiers = ["codebuild.amazonaws.com"]
     }
 
     effect = "Allow"
@@ -79,4 +82,4 @@ resource "aws_iam_policy" "policy" {
 resource "aws_iam_role_policy_attachment" "test-attach" {
   role       = aws_iam_role.default.name
   policy_arn = aws_iam_policy.policy.arn
-} */
+}
