@@ -36,10 +36,6 @@ module "build" {
   #environment_variables = each.value.environment_variables 
 }
 
-output "example" {
-  value = jsondecode(data.aws_secretsmanager_secret_version.secret-version.secret_string)["chatbot_github_token"]
-  sensitive = true
-}
 
 /* resource "aws_iam_role" "default" {
   name                  = "EKS_assume_role_created_from_terraform_by_kx"
