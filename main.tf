@@ -4,9 +4,9 @@ locals {
   aws_account_id = data.aws_caller_identity.default.account_id
   aws_root_account_arn = format("%s:root", data.aws_caller_identity.default.arn)
 
-  roles = [
+  names = [
     for index in module.codebuild:
-      index.role_arn
+      index.role_name
   ]
 }
 data "aws_secretsmanager_secret" "by-arn" {
@@ -102,7 +102,7 @@ resource "aws_iam_policy" "assume_role_eks_policy" {
 resource "aws_iam_role_policy_attachment" "assume_role_eks_attach" {
   count = length(module.codebuild)
   policy_arn = aws_iam_policy.assume_role_eks_policy.arn
-  role = local.roles[count.index]
+  role = local.names[count.index]
 }
 
 /* output "role_arn" {
