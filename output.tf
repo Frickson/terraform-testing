@@ -7,12 +7,6 @@ output "example" {
     sensitive = true
 }
 
-
-
-
-
-
-
 output "role_arn" {
-    value = module.build.role_arn[0]
+    value = module.build.role_arn
 }
