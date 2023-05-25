@@ -5,7 +5,7 @@ locals {
   aws_root_account_arn = format("%s:root", data.aws_caller_identity.default.arn)
 
   roles = [
-    for index in module.build:
+    for index in module.codebuild:
       index.role_arn
   ]
 }
