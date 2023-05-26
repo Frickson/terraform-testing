@@ -1,4 +1,4 @@
-module "lambda_function" {
+/* module "lambda_function" {
   for_each = var.lambda
   source  = "github.com/nec-msbu-devops/aws-lambda-function"
   filename      = each.value.filename
@@ -7,7 +7,7 @@ module "lambda_function" {
   runtime       = each.value.runtime
   enable_function_url = each.value.enable_function_url
   function_url_auth_type = each.value.function_url_auth_type
-}
+} */
 
 /* output "function_name"{
     value = module.lambda.function_name
