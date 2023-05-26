@@ -23,5 +23,5 @@ output "project_id" {
 }
 
 output "testabc" {
-  value = [for x in local.test: x.project_id if x.name == "build3"]
+  value = [for x in local.test: x.project_id if x.name == "build3"][0]
 }
