@@ -14,3 +14,11 @@ output "role_arn" {
   }]
 }
 
+
+output "project_id" {
+  /* description = "IAM Role ARN" */
+  value = [for index in module.codebuild:{
+    arn = index.project_id
+  }]
+}
+
