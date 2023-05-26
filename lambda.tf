@@ -11,10 +11,11 @@ module "lambda" {
 output "function_name"{
     value = module.lambda.function_name
 }
-/* resource "aws_lambda_function_url" "test_latest" {
-  function_name      = aws_lambda_function.test.function_name
+
+resource "aws_lambda_function_url" "function_url" {
+  function_name      = module.lambda.function_name
   authorization_type = "NONE"
-} */
+}
 
 /* resource "aws_lambda_function_url" "test_live" {
   function_name      = aws_lambda_function.test.function_name
