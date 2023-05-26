@@ -11,7 +11,6 @@ locals {
     for index in var.parameters:
       index.value
   ]
-
 }
 
 resource "aws_ssm_parameter" "params" {
@@ -22,7 +21,7 @@ resource "aws_ssm_parameter" "params" {
 }
 
 resource "aws_ssm_parameter" "params-1" {
-  for_each = { for p in var.parameters-1 : p.name => p }
+  for_each = {for p in var.parameters-1 : p.name => p  }
   name  = each.value.name
   type  = each.value.type
   value = each.value.value
