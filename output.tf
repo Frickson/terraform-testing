@@ -11,8 +11,17 @@ output "role_arn" {
   description = "IAM Role ARN"
   value = [for index in module.codebuild:{
     arn = index.role_arn
-    project_id = index.project_id
   }]
 }
 
 
+output "project_id" {
+  /* description = "IAM Role ARN" */
+  value = [for index in module.codebuild:{
+    arn = index.project_id
+  }]
+}
+
+output "testabc" {
+  value = local.test 
+}

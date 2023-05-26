@@ -8,6 +8,12 @@ locals {
     for index in module.codebuild:
       index.role_name
   ]
+  test = [
+    for index in module.codebuild:{
+      name = index.role_name
+      project_id = index.project_id
+    }
+  ]
 }
 data "aws_secretsmanager_secret" "by-arn" {
   arn = "arn:aws:secretsmanager:ap-southeast-1:925016504071:secret:chatbot_github_token-pBcvSV"
