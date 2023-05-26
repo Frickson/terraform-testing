@@ -23,5 +23,5 @@ output "project_id" {
 }
 
 output "testabc" {
-  value = tostring([for x in local.test: x.project_id if x.role_name == "build3"])
+  value = tostring([for x in local.test: x.project_id if x.name == "build3"])
 }
