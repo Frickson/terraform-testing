@@ -1,12 +1,13 @@
-module "lambda" {
+module "lambda_function" {
+  for_each = var.lambda
   source  = "cloudposse/lambda-function/aws"
   version = "v0.5.0"
-  for_each = var.lambda
-  filename      = each.value.filename 
+  filename      = each.value.filename
   function_name = each.key
   handler       = each.value.handler
   runtime       = each.value.runtime
   enable_function_url = each.value.enable_function_url
+  function_url_auth_type = each.value.function_url_auth_type
 }
 
 /* output "function_name"{
