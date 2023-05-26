@@ -1,7 +1,6 @@
 module "lambda_function" {
   for_each = var.lambda
-  source  = "cloudposse/lambda-function/aws"
-  version = "v0.5.0"
+  source  = "github.com/nec-msbu-devops/aws-lambda-function"
   filename      = each.value.filename
   function_name = each.key
   handler       = each.value.handler
