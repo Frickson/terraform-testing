@@ -1,21 +1,22 @@
 module "lambda" {
   source  = "cloudposse/lambda-function/aws"
   version = "v0.5.0"
-
-  filename      = "lambda.zip"
-  function_name = "my-function-terraform"
-  handler       = "lambda_function.lambda_handler"
-  runtime       = "python3.9"
+  for_each = var.lambda
+  filename      = each.value.filename 
+  function_name = each.key
+  handler       = each.value.handler
+  runtime       = each.value.runtime
+  enable_function_url = each.value.enable_function_url
 }
 
-output "function_name"{
+/* output "function_name"{
     value = module.lambda.function_name
 }
 
 resource "aws_lambda_function_url" "function_url" {
   function_name      = module.lambda.function_name
   authorization_type = "NONE"
-}
+} */
 
 /* resource "aws_lambda_function_url" "test_live" {
   function_name      = aws_lambda_function.test.function_name
