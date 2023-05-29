@@ -29,10 +29,10 @@ output "updated_function_1" {
     value = module.lambda.function_name
 } */
 
-resource "aws_lambda_function_url" "function_url" {
-  function_name      = module.lambda.function_name
+/* resource "aws_lambda_function_url" "function_url" {
+  function_name      = module.lambda_function.function_name
   authorization_type = "NONE"
-} 
+}  */
 
 /* resource "aws_lambda_function_url" "test_live" {
   function_name      = aws_lambda_function.test.function_name
