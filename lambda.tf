@@ -9,32 +9,30 @@ module "lambda_function" {
   function_url_auth_type = each.value.function_url_auth_type
 }
 
-/* locals { */
+locals {
   /* updated_function_1 = merge(
     var.lambda["function-1"],
     {
-      
       new_attribute = "value"
     }
   ) */
-  /* new_value = [for x in var.lambda: merge(x,
+  new_value = [for x in var.lambda: merge(x,
     {
       new_attribute = "value"
-    })] */
-  
-/* } */
+    })]
+ }
 
-/* output "updated_function_1" {
+output "updated_function_1" {
   value = local.new_value
-} */
-/* output "function_name"{
-    value = module.lambda.function_name
 }
+/* /* output "function_name"{
+    value = module.lambda.function_name
+} */
 
 resource "aws_lambda_function_url" "function_url" {
   function_name      = module.lambda.function_name
   authorization_type = "NONE"
-} */
+} 
 
 /* resource "aws_lambda_function_url" "test_live" {
   function_name      = aws_lambda_function.test.function_name
