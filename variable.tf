@@ -131,7 +131,6 @@ variable "parameters-2" {
 variable "lambda" {
   type = map(object({
     filename  = string
-    /* function_name  = string */
     handler = string
     runtime = string
     enable_function_url = bool
@@ -140,7 +139,6 @@ variable "lambda" {
   default = {
     "function-1" = {
       filename  = "lambda_source/ImpToSecurityHubEKS.zip"
-      /* function_name  = string */
       handler = "lambda_function.lambda_handler"
       runtime = "python3.10"
       enable_function_url = false
@@ -148,12 +146,10 @@ variable "lambda" {
     },
     "function-2" = {
       filename  = "lambda_source/trigger.zip"
-      /* function_name  = string */
       handler = "lambda_function.lambda_handler"
       runtime = "python3.10"
       enable_function_url = true
       function_url_auth_type = "NONE"
     }
-    # Add more parameters as needed
   }
 }
