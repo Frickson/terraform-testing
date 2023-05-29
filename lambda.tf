@@ -16,7 +16,7 @@ locals {
       new_attribute = "value"
     }
   ) */
-  new_value = [for x in var.lambda: merge(var.lambda[x],
+  new_value = [for x in var.lambda: merge(x,
     {
       new_attribute = "value"
     })]
