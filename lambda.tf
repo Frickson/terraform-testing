@@ -11,7 +11,7 @@ module "lambda_function" {
 
 locals {
   updated_function_1 = merge(
-    var.default["function-1"],
+    var.lambda["function-1"],
     {
       new_attribute = "value"
     }
