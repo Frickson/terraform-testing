@@ -140,14 +140,14 @@ variable "lambda" {
     "function-1" = {
       filename  = "lambda_source/ImpToSecurityHubEKS.zip"
       handler = "lambda_function.lambda_handler"
-      runtime = "python3.10"
+      runtime = "python3.9"
       enable_function_url = false
       function_url_auth_type = ""
     },
     "function-2" = {
       filename  = "lambda_source/trigger.zip"
       handler = "lambda_function.lambda_handler"
-      runtime = "python3.10"
+      runtime = "python3.9"
       enable_function_url = true
       function_url_auth_type = "NONE"
     }

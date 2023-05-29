@@ -10,16 +10,20 @@ module "lambda_function" {
 }
 
 locals {
-  updated_function_1 = merge(
+  /* updated_function_1 = merge(
     var.lambda["function-1"],
     {
       new_attribute = "value"
     }
-  )
+  ) */
+  new_value = [for x in var.var.lambda: merge(var.lambda[x],
+    {
+      new_attribute = "value"
+    })]
 }
 
 output "updated_function_1" {
-  value = local.updated_function_1
+  value = local.new_value
 }
 /* output "function_name"{
     value = module.lambda.function_name
