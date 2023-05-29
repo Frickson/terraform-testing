@@ -13,6 +13,7 @@ module "lambda_function" {
   /* updated_function_1 = merge(
     var.lambda["function-1"],
     {
+      
       new_attribute = "value"
     }
   ) */
