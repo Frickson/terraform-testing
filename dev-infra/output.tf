@@ -1,3 +1,3 @@
 output "test" {
-  value = module.dev_chatbot.role_arn
+  value = one(module.dev_chatbot.*.role_arn)
 }
