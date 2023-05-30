@@ -14,14 +14,3 @@ output "role_arn" {
   }]
 }
 
-
-output "project_id" {
-  /* description = "IAM Role ARN" */
-  value = [for index in module.codebuild:{
-    arn = index.project_id
-  }]
-}
-
-output "testabc" {
-  value = length(local.test)!=0 ? [for x in local.test: x.project_id if x.name == "build3"][0] : "shit"
-}

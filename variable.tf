@@ -107,6 +107,10 @@ variable "parameters-1" {
   ]
 }
 
+#variable to add
+# COMMIT_ID, ROLE_ARN?, NAMESPACE/ENVIRONMENT
+# SECRET MANAGER
+# GITHUB_TOKEN X2, ask from boss 
 variable "parameters-2" {
   type = map(object({
     name  = string

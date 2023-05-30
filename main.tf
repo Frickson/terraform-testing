@@ -8,12 +8,6 @@ locals {
     for index in module.codebuild:
       index.role_name
   ]
-  test = [
-    for index in module.codebuild:{
-      name = index.role_name
-      project_id = index.project_id
-    }
-  ]
 }
 data "aws_secretsmanager_secret" "by-arn" {
   arn = "arn:aws:secretsmanager:ap-southeast-1:925016504071:secret:chatbot_github_token-pBcvSV"
@@ -43,8 +37,6 @@ module "codebuild" {
   cache_type          = each.value.cache_type
   local_cache_modes   = each.value.local_cache_modes
   extra_permissions   = length(var.extra_permissions) != 0 ? var.extra_permissions : []
-  
-  #environment_variables = each.value.environment_variables 
 }
 
 
