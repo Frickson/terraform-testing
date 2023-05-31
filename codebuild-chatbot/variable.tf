@@ -35,9 +35,9 @@ locals {
     },
     "git-credentials-check" = {
       name          = "build4"
-      source_type   = "CODEPIPELINE"
+      source_type   = "NO_SOURCE"
       source_location = ""
-      buildspec     = file("${path.module}/buildspec/git-secret-check.yaml")
+      buildspec     = file("${path.module}/git-secret-check.yaml")
       privileged_mode = true
       cache_type    = "LOCAL"
       local_cache_modes = ["LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE"]
