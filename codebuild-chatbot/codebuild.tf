@@ -10,7 +10,7 @@ module "codebuild" {
   for_each = local.codebuild
   source = "github.com/nec-msbu-devops/chatbot-aws-codebuild"
   name                = each.value.name
-  private_repository  = true
+  private_repository  = each.value.source_type == "GITHUB" ? true : false
   source_credential_token = each.value.source_type == "GITHUB" ? local.token : ""
   source_type         = each.value.source_type
   source_location     = each.value.source_location
