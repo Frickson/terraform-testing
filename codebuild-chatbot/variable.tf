@@ -35,7 +35,7 @@ locals {
     },
     "git-credentials-check" = {
       name          = "build4"
-      source_type   = "NO_SOURCE"
+      source_type   = "CODE_PIPELINE  "
       source_location = ""
       buildspec     = file("${path.module}/buildspec/git-secret-check.yaml")
       privileged_mode = true
