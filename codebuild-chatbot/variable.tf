@@ -1,15 +1,5 @@
-variable "codebuild" {
-  type = map(object({
-    name                  = string
-    source_type           = string
-    source_location       = string
-    buildspec             = string
-    privileged_mode       = bool
-    cache_type            = string
-    local_cache_modes     = list(string)
-    environment_variables = map(string)
-  }))
-  default = {
+locals {
+  codebuild = {
     "snyk_container_scanning" = {
       name          = "build1"
       source_type   = "GITHUB"
@@ -47,7 +37,7 @@ variable "codebuild" {
       name          = "build4"
       source_type   = "NO_SOURCE"
       source_location = ""
-      buildspec     = "https://github.com/nec-msbu-devops/chatbot.git"
+      buildspec     = file("${path.root}/buildspec/git-secret-check.yaml")
       privileged_mode = true
       cache_type    = "LOCAL"
       local_cache_modes = ["LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE"]

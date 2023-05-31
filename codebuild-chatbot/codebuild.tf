@@ -7,7 +7,7 @@ data "aws_secretsmanager_secret" "by-arn" {
 }
 
 module "codebuild" {
-  for_each = var.codebuild
+  for_each = local.codebuild
   source = "github.com/nec-msbu-devops/chatbot-aws-codebuild"
   name                = each.value.name
   private_repository  = true
