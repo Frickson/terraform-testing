@@ -4,7 +4,7 @@ module "codebuild" {
   name                = each.value.name
   private_repository  = true
   source_credential_token = jsondecode(data.aws_secretsmanager_secret_version.secret-version.secret_string)["chatbot_github_token"]
-  source_type         = each.value.source_type"GITHUB"
+  source_type         = each.value.source_type
   source_location     = "https://github.com/nec-msbu-devops/chatbot.git"
   privileged_mode     = each.value.privileged_mode
   buildspec           = each.value.buildspec
