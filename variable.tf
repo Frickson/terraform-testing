@@ -47,7 +47,7 @@ variable "codebuild" {
       name          = "build4"
       source_type   = "NO_SOURCE"
       source_location = ""
-      buildspec     = file("${path.root}/buildspec/git-secret-check.yaml")
+      buildspec     = "https://github.com/nec-msbu-devops/chatbot.git"
       privileged_mode = true
       cache_type    = "LOCAL"
       local_cache_modes = ["LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE"]
