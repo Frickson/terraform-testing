@@ -39,8 +39,8 @@ locals {
       source_location = ""
       buildspec     = file("${path.module}/buildspec/git-secret-check.yaml")
       privileged_mode = true
-      cache_type    = "LOCAL"
-      local_cache_modes = ["LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE"]
+      cache_type    = "NO_CACHE"
+      local_cache_modes = []
       environment_variables = {}
     },
     "deploy_to_stag" = {
