@@ -13,7 +13,7 @@ module "codebuild" {
   private_repository  = true
   source_credential_token = each.value.source_type == "GITHUB" ? local.token : ""
   source_type         = each.value.source_type
-  source_location     = each.source_location
+  source_location     = each.value.source_location
   privileged_mode     = each.value.privileged_mode
   buildspec           = each.value.buildspec
   artifact_type       = "NO_ARTIFACTS"
