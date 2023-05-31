@@ -6,6 +6,6 @@ variable "environment" {
 
 variable "git_branch" {
   type = string
-  default = "main"
+  default = "development"
   description = "👾🕹️"
 }
