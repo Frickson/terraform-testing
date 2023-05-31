@@ -1,6 +1,7 @@
 variable "codebuild" {
   type = map(object({
     name                  = string
+    source_type           = string
     buildspec             = string
     privileged_mode       = bool
     cache_type            = string
@@ -10,6 +11,7 @@ variable "codebuild" {
   default = {
     "snyk_container_scanning" = {
       name          = "build1"
+      source_type   = "GITHUB"
       buildspec     = "chatbot/buildspecs/buildspec-snyk.yml"
       privileged_mode = true
       cache_type    = "LOCAL"
@@ -21,6 +23,7 @@ variable "codebuild" {
     },
     "ECR_image_scanning" = {
       name          = "build2"
+      source_type   = "GITHUB"
       buildspec     = "chatbot/buildspecs/buildspec-ecr.yml"
       privileged_mode = false
       cache_type    = "NO_CACHE"
@@ -29,6 +32,7 @@ variable "codebuild" {
     },
     "deploy_to_staging" = {
       name          = "build3"
+      source_type   = "GITHUB"
       buildspec     = "chatbot/buildspecs/buildspec-stag.yml"
       privileged_mode = false
       cache_type    = "NO_CACHE"
@@ -37,7 +41,8 @@ variable "codebuild" {
     },
     "git-credentials-check" = {
       name          = "build4"
-      buildspec     = "chatbot/buildspecs/buildspec-gitsecrets.yml"
+      source_type   = "NO_SOURCE"
+      buildspec     = file("${path.root}/buildspec/git-secret-check.yaml")
       privileged_mode = true
       cache_type    = "LOCAL"
       local_cache_modes = ["LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE"]
@@ -45,6 +50,7 @@ variable "codebuild" {
     },
     "deploy_to_stag" = {
       name          = "build5"
+      source_type   = "GITHUB"
       buildspec     = "chatbot/buildspecs/buildspec-stag.yml"
       privileged_mode = true
       cache_type    = "LOCAL"
