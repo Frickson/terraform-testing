@@ -9,9 +9,6 @@ locals {
       index.role_name
   ]
 }
-data "aws_secretsmanager_secret" "by-arn" {
-  arn = "arn:aws:secretsmanager:ap-southeast-1:925016504071:secret:chatbot_github_token-pBcvSV"
-}
 
 data "aws_secretsmanager_secret_version" "secret-version" {
   secret_id = data.aws_secretsmanager_secret.by-arn.id

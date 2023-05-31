@@ -2,6 +2,7 @@ variable "codebuild" {
   type = map(object({
     name                  = string
     source_type           = string
+    source_location       = string
     buildspec             = string
     privileged_mode       = bool
     cache_type            = string
@@ -12,6 +13,7 @@ variable "codebuild" {
     "snyk_container_scanning" = {
       name          = "build1"
       source_type   = "GITHUB"
+      source_location = "https://github.com/nec-msbu-devops/chatbot.git"
       buildspec     = "chatbot/buildspecs/buildspec-snyk.yml"
       privileged_mode = true
       cache_type    = "LOCAL"
@@ -24,6 +26,7 @@ variable "codebuild" {
     "ECR_image_scanning" = {
       name          = "build2"
       source_type   = "GITHUB"
+      source_location = "https://github.com/nec-msbu-devops/chatbot.git"
       buildspec     = "chatbot/buildspecs/buildspec-ecr.yml"
       privileged_mode = false
       cache_type    = "NO_CACHE"
@@ -33,6 +36,7 @@ variable "codebuild" {
     "deploy_to_staging" = {
       name          = "build3"
       source_type   = "GITHUB"
+      source_location = "https://github.com/nec-msbu-devops/chatbot.git"
       buildspec     = "chatbot/buildspecs/buildspec-stag.yml"
       privileged_mode = false
       cache_type    = "NO_CACHE"
@@ -42,6 +46,7 @@ variable "codebuild" {
     "git-credentials-check" = {
       name          = "build4"
       source_type   = "NO_SOURCE"
+      source_location = ""
       buildspec     = file("${path.root}/buildspec/git-secret-check.yaml")
       privileged_mode = true
       cache_type    = "LOCAL"
@@ -51,6 +56,7 @@ variable "codebuild" {
     "deploy_to_stag" = {
       name          = "build5"
       source_type   = "GITHUB"
+      source_location = "https://github.com/nec-msbu-devops/chatbot.git"
       buildspec     = "chatbot/buildspecs/buildspec-stag.yml"
       privileged_mode = true
       cache_type    = "LOCAL"
