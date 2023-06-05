@@ -1,5 +1,15 @@
 locals {
   codebuild = {
+    "buildspec-build_image" = {
+      name          = "buildspec-build_image"
+      source_type   = "GITHUB"
+      source_location = var.source_location_url
+      buildspec     = "chatbot/buildspecs/buildspec-build_image.yml"
+      privileged_mode = true
+      cache_type    = "LOCAL"
+      local_cache_modes = ["LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE"]
+      environment_variables = {}
+    },
     "snyk_container_scanning" = {
       name          = "build1"
       source_type   = "GITHUB"
