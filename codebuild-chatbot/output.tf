@@ -13,4 +13,3 @@ output "role_arn" {
     arn = index.role_arn
   }]
 }
-
