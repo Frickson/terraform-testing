@@ -37,7 +37,7 @@ locals {
       # using file becuz codepipeline required minimum 2 stages to create
       # maybe can move to repo, repo with only this yaml fil
       buildspec     = file("${path.module}/buildspec/git-secret-check.yaml")
-      privileged_mode = true
+      privileged_mode = false
       cache_type    = "NO_CACHE"
       local_cache_modes = []
       environment_variables = {
@@ -53,6 +53,16 @@ locals {
       privileged_mode = true
       cache_type    = "LOCAL"
       local_cache_modes = ["LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE"]
+      environment_variables = {}
+    }
+    "terraform_scan_by_kx" = {
+      name          = "build6"
+      source_type   = "NO_SOURCE"
+      source_location = ""
+      buildspec     = file("${path.module}/buildspec/terraform-scan.yaml")
+      privileged_mode = false
+      cache_type    = "NO_CACHE"
+      local_cache_modes = []
       environment_variables = {}
     }
   }

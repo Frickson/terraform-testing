@@ -1,0 +1,13 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - terraform -version
+      - echo "$CODEBUILD_BUILD_NUMBER"
+  build:
+    commands:
+      - cd $CODEBUILD_SRC_DIR
+      - cd terraform
+      - terraform init
+      - terraform validate
