@@ -34,6 +34,8 @@ locals {
       name          = "build4"
       source_type   = "NO_SOURCE"
       source_location = ""
+      # using file becuz codepipeline required minimum 2 stages to create
+      # maybe can move to repo, repo with only this yaml fil
       buildspec     = file("${path.module}/buildspec/git-secret-check.yaml")
       privileged_mode = true
       cache_type    = "NO_CACHE"
