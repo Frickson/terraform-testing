@@ -10,9 +10,7 @@ locals {
   ]
 }
 
-data "aws_secretsmanager_secret_version" "secret-version" {
-  secret_id = data.aws_secretsmanager_secret.by-arn.id
-}
+
 
 resource "aws_codestarconnections_connection" "_" {
   name          = var.codestar_connection_name

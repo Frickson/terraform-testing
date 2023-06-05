@@ -3,20 +3,17 @@ locals {
     "snyk_container_scanning" = {
       name          = "build1"
       source_type   = "GITHUB"
-      source_location = "https://github.com/nec-msbu-devops/chatbot.git"
+      source_location = var.source_location_url
       buildspec     = "chatbot/buildspecs/buildspec-snyk.yml"
       privileged_mode = true
       cache_type    = "LOCAL"
       local_cache_modes = ["LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE"]
-      environment_variables = {
-        "KEY1" = "VALUE1" 
-        "KEY2" = "VALUE2"
-      }
+      environment_variables = {}
     },
     "ECR_image_scanning" = {
       name          = "build2"
       source_type   = "GITHUB"
-      source_location = "https://github.com/nec-msbu-devops/chatbot.git"
+      source_location = var.source_location_url
       buildspec     = "chatbot/buildspecs/buildspec-ecr.yml"
       privileged_mode = false
       cache_type    = "NO_CACHE"
@@ -26,7 +23,7 @@ locals {
     "deploy_to_staging" = {
       name          = "build3"
       source_type   = "GITHUB"
-      source_location = "https://github.com/nec-msbu-devops/chatbot.git"
+      source_location = var.source_location_url
       buildspec     = "chatbot/buildspecs/buildspec-stag.yml"
       privileged_mode = false
       cache_type    = "NO_CACHE"
@@ -41,12 +38,15 @@ locals {
       privileged_mode = true
       cache_type    = "NO_CACHE"
       local_cache_modes = []
-      environment_variables = {}
+      environment_variables = {
+        "KEY1" = "VALUE1" 
+        "KEY2" = "VALUE2"
+      }
     },
     "deploy_to_stag" = {
       name          = "build5"
       source_type   = "GITHUB"
-      source_location = "https://github.com/nec-msbu-devops/chatbot.git"
+      source_location = var.source_location_url
       buildspec     = "chatbot/buildspecs/buildspec-stag.yml"
       privileged_mode = true
       cache_type    = "LOCAL"
@@ -54,6 +54,13 @@ locals {
       environment_variables = {}
     }
   }
+}
+
+
+variable "source_location_url" {
+  type = string
+  default = "https://github.com/nec-msbu-devops/chatbot.git"
+  description = "buildspec source repository url"
 }
 
 variable "codestar_connection_name" {
