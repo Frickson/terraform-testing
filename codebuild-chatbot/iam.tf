@@ -46,7 +46,7 @@ data "aws_iam_policy_document" "assume_role_eks" {
   statement {
     effect    = "Allow"
     actions   = ["sts:AssumeRole"]
-    resources = [aws_iam_role.default.arn]
+    resources = ["arn:aws:iam::925016504071:role/development-describe-cluster-cross-account"]
   }
 }
 

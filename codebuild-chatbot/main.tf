@@ -10,8 +10,6 @@ locals {
   ]
 }
 
-
-
 resource "aws_codestarconnections_connection" "_" {
   name          = var.codestar_connection_name
   provider_type = var.git_provider_type

@@ -101,7 +101,7 @@ variable "extra_permissions" {
   description = "List of action strings which will be added to IAM service account permissions."
 }
 
-variable "parameters" {
+/* variable "parameters" {
   default = [
     {
       name  = "foo"
@@ -115,7 +115,7 @@ variable "parameters" {
     },
     # Add more parameters as needed
   ]
-}
+} */
 
 variable "parameters-1" {
   type = list(object({
@@ -125,14 +125,14 @@ variable "parameters-1" {
   }))
   default = [
     {
-      name  = "foo1"
+      name  = "CLUSTER_NAME"
       type  = "String"
-      value = "bar"
+      value = "chatbot"
     },
     {
-      name  = "another_parameter1"
+      name  = "COMMIT_ID"
       type  = "String"
-      value = "example"
+      value = "default"
     }
     # Add more parameters as needed
   ]
@@ -141,8 +141,11 @@ variable "parameters-1" {
 #variable to add
 # COMMIT_ID, ROLE_ARN?, NAMESPACE/ENVIRONMENT
 # SECRET MANAGER
-# GITHUB_TOKEN X2, ask from boss 
-variable "parameters-2" {
+# GITHUB_TOKEN X2, ask from boss
+# synk api-key
+
+
+/* variable "parameters-2" {
   type = map(object({
     name  = string
     type  = string
@@ -161,7 +164,7 @@ variable "parameters-2" {
     }
     # Add more parameters as needed
   }
-}
+} */
 
 variable "lambda" {
   type = map(object({
