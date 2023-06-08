@@ -23,5 +23,7 @@ module "codebuild" {
   artifact_type       = "NO_ARTIFACTS"
   cache_type          = each.value.cache_type
   local_cache_modes   = each.value.local_cache_modes
-  extra_permissions   = length(var.extra_permissions) != 0 ? var.extra_permissions : []
+  extra_permissions   = var.extra_permissions
+  environment_variables = each.value.environment_variables ? each.value.environment_variables : {}
+  vpc_config = each.value.vpc_config ? each.value.vpc_config : {}
 }

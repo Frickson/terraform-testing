@@ -8,7 +8,6 @@ locals {
       privileged_mode = true
       cache_type    = "LOCAL"
       local_cache_modes = ["LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE"]
-      environment_variables = {}
     },
     "snyk_container_scanning" = {
       name          = "build1"
@@ -18,7 +17,6 @@ locals {
       privileged_mode = true
       cache_type    = "LOCAL"
       local_cache_modes = ["LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE"]
-      environment_variables = {}
     },
     "ECR_image_scanning" = {
       name          = "build2"
@@ -28,17 +26,6 @@ locals {
       privileged_mode = false
       cache_type    = "NO_CACHE"
       local_cache_modes = []
-      environment_variables = {}
-    },
-    "deploy_to_staging" = {
-      name          = "build3"
-      source_type   = "GITHUB"
-      source_location = var.source_location_url
-      buildspec     = "chatbot/buildspecs/buildspec-stag.yml"
-      privileged_mode = false
-      cache_type    = "NO_CACHE"
-      local_cache_modes = []
-      environment_variables = {}
     },
     "git-credentials-check" = {
       name          = "build4"
@@ -63,7 +50,18 @@ locals {
       privileged_mode = true
       cache_type    = "LOCAL"
       local_cache_modes = ["LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE"]
-      environment_variables = {}
+      vpc_config = {
+        vpc_id = aws_vpc.example.id
+        subnets = [
+          aws_subnet.example1.id,
+          aws_subnet.example2.id,
+        ]
+
+        security_group_ids = [
+          aws_security_group.example1.id,
+          aws_security_group.example2.id,
+        ]
+     }
     }
     "terraform_scan_by_kx" = {
       name          = "build6"
@@ -73,7 +71,6 @@ locals {
       privileged_mode = true
       cache_type    = "LOCAL"
       local_cache_modes = ["LOCAL_DOCKER_LAYER_CACHE"]
-      environment_variables = {}
     }
   }
 }
@@ -144,16 +141,16 @@ variable "parameters-1" {
 # GITHUB_TOKEN X2, ask from boss
 # synk api-key
 
-
-/* variable "parameters-2" {
+/* 
+variable "parameters-2" {
   type = map(object({
     name  = string
     type  = string
     value = string
   }))
   default = {
-    "test1" = {
-      name  = "foo2"
+    "CLUSTER_NAME" = {
+      name  = "CLUSTER_NAME"
       type  = "String"
       value = "bar"
     },
