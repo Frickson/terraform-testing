@@ -51,15 +51,14 @@ locals {
       cache_type    = "LOCAL"
       local_cache_modes = ["LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE"]
       vpc_config = {
-        vpc_id = aws_vpc.example.id
+        vpc_id = "vpc-082b9db10b172efca"
         subnets = [
-          aws_subnet.example1.id,
-          aws_subnet.example2.id,
+          "subnet-017543a237f6844da",
+          "subnet-042e439c1960131c3",
         ]
 
         security_group_ids = [
-          aws_security_group.example1.id,
-          aws_security_group.example2.id,
+          "sg-057743b6da4cfecbf"
         ]
      }
     }
