@@ -37,10 +37,10 @@ locals {
       privileged_mode = false
       cache_type    = "NO_CACHE"
       local_cache_modes = []
-      environment_variables = {
+      environment_variables = [{
         "KEY1" = "VALUE1" 
         "KEY2" = "VALUE2"
-      }
+      }]
     },
     "deploy_to_stag" = {
       name          = "build5"
