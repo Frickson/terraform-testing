@@ -57,7 +57,7 @@ locals {
       privileged_mode = true
       cache_type    = "LOCAL"
       local_cache_modes = ["LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE"]
-      environment_variables = {}
+      environment_variables = []
       vpc_config = {
         vpc_id = "vpc-082b9db10b172efca"
         subnets = [
