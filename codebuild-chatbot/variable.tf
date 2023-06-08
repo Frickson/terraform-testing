@@ -72,14 +72,16 @@ variable "vpc_config" {
     security_group_ids = list(string)
   }))
   default = {
-    vpc_id = "vpc-082b9db10b172efca"
-    subnets = [
-      "subnet-017543a237f6844da",
-      "subnet-042e439c1960131c3",
-    ]
-    security_group_ids = [
-      "sg-057743b6da4cfecbf"
-    ]
+    vpc_config = {
+      vpc_id = "vpc-082b9db10b172efca"
+      subnets = [
+        "subnet-017543a237f6844da",
+        "subnet-042e439c1960131c3",
+      ]
+      security_group_ids = [
+        "sg-057743b6da4cfecbf"
+      ]
+    }
   }
 }
 variable "source_location_url" {
