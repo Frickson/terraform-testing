@@ -8,6 +8,8 @@ locals {
       privileged_mode = true
       cache_type    = "LOCAL"
       local_cache_modes = ["LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE"]
+      environment_variables = []
+      vpc_config = {}
     },
     "snyk_container_scanning" = {
       name          = "build1"
@@ -17,6 +19,8 @@ locals {
       privileged_mode = true
       cache_type    = "LOCAL"
       local_cache_modes = ["LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE"]
+      environment_variables = []
+      vpc_config = {}
     },
     "ECR_image_scanning" = {
       name          = "build2"
@@ -26,6 +30,8 @@ locals {
       privileged_mode = false
       cache_type    = "NO_CACHE"
       local_cache_modes = []
+      environment_variables = []
+      vpc_config = {}
     },
     "git-credentials-check" = {
       name          = "build4"
@@ -41,6 +47,7 @@ locals {
         "KEY1" = "VALUE1" 
         "KEY2" = "VALUE2"
       }]
+      vpc_config = {}
     },
     "deploy_to_stag" = {
       name          = "build5"
@@ -50,6 +57,7 @@ locals {
       privileged_mode = true
       cache_type    = "LOCAL"
       local_cache_modes = ["LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE"]
+      environment_variables = {}
       vpc_config = {
         vpc_id = "vpc-082b9db10b172efca"
         subnets = [
@@ -70,6 +78,8 @@ locals {
       privileged_mode = true
       cache_type    = "LOCAL"
       local_cache_modes = ["LOCAL_DOCKER_LAYER_CACHE"]
+      environment_variables = []
+      vpc_config = {}
     }
   }
 }
