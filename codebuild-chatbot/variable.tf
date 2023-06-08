@@ -66,7 +66,11 @@ locals {
 }
 
 variable "vpc_config" {
-  type = map(object)
+  type = map(object({
+    vpc_id             = string
+    subnets            = list(string)
+    security_group_ids = list(string)
+  }))
   default = {
     vpc_id = "vpc-082b9db10b172efca"
     subnets = [
