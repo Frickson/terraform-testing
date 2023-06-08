@@ -13,6 +13,7 @@ resource "aws_iam_policy" "assume_role_eks_policy" {
 }
 
 resource "aws_iam_role_policy_attachment" "assume_role_eks_attach" {
+  for_each = {for x, y in local.names : y => y if x == "build4"  }
   policy_arn = aws_iam_policy.assume_role_eks_policy.arn
-  role = local.names["build4"]
+  role = y
 }
