@@ -43,10 +43,13 @@ locals {
       privileged_mode = false
       cache_type    = "NO_CACHE"
       local_cache_modes = []
-      environment_variables = [{
-        "KEY1" = "VALUE1" 
-        "KEY2" = "VALUE2"
-      }]
+      environment_variables = [
+        {
+          name  = "JENKINS_URL"
+          value = "https://jenkins.example.com"
+          type  = "PLAINTEXT"
+        }
+      ]
       vpc_config = {}
     },
     "deploy_to_stag" = {
