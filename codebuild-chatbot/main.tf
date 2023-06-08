@@ -4,11 +4,10 @@ locals {
   aws_account_id = data.aws_caller_identity.default.account_id
   aws_root_account_arn = format("%s:root", data.aws_caller_identity.default.arn)
 
-  names = {
-    for index in module.codebuild: index.project_name => {
-      role_name = index.role_name
-    }
-  }
+  names = [
+    for index in module.codebuild:
+      index.role_name
+  ]
 }
 
 resource "aws_codestarconnections_connection" "_" {
