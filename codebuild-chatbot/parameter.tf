@@ -27,9 +27,9 @@
   value = each.value.value
 } */
 
-/* resource "aws_ssm_parameter" "params-1" {
+resource "aws_ssm_parameter" "params-1" {
   for_each = {for p in var.parameters-1 : p.name => p  }
   name  = each.value.name
   type  = each.value.type
   value = each.value.value
-} */
+}
