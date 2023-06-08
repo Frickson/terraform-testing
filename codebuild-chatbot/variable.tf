@@ -48,6 +48,11 @@ locals {
           name  = "JENKINS_URL"
           value = "https://jenkins.example.com"
           type  = "PLAINTEXT"
+        },
+        {
+          name  = "COMPANY_NAME"
+          value = "Amazon"
+          type  = "PLAINTEXT"
         }
       ]
       vpc_config = {}
