@@ -68,17 +68,14 @@ locals {
 variable "vpc_config" {
   type = map(object)
   default = {
-    vpc_config = {
-      vpc_id = "vpc-082b9db10b172efca"
-      subnets = [
-        "subnet-017543a237f6844da",
-        "subnet-042e439c1960131c3",
-      ]
-
-      security_group_ids = [
-        "sg-057743b6da4cfecbf"
-      ]
-    }
+    vpc_id = "vpc-082b9db10b172efca"
+    subnets = [
+      "subnet-017543a237f6844da",
+      "subnet-042e439c1960131c3",
+    ]
+    security_group_ids = [
+      "sg-057743b6da4cfecbf"
+    ]
   }
 }
 variable "source_location_url" {
@@ -103,21 +100,6 @@ variable "extra_permissions" {
   description = "List of action strings which will be added to IAM service account permissions."
 }
 
-/* variable "parameters" {
-  default = [
-    {
-      name  = "foo"
-      type  = "String"
-      value = "bar"
-    },
-    {
-      name  = "another_parameter"
-      type  = "String"
-      value = "example"
-    },
-    # Add more parameters as needed
-  ]
-} */
 
 variable "parameters-1" {
   type = list(object({
@@ -139,6 +121,48 @@ variable "parameters-1" {
     # Add more parameters as needed
   ]
 }
+
+variable "lambda" {
+  type = map(object({
+    filename  = string
+    handler = string
+    runtime = string
+    enable_function_url = bool
+    function_url_auth_type = string
+  }))
+  default = {
+    "function-1" = {
+      filename  = "lambda_source/ImpToSecurityHubEKS.zip"
+      handler = "lambda_function.lambda_handler"
+      runtime = "python3.9"
+      enable_function_url = false
+      function_url_auth_type = ""
+    },
+    "function-2" = {
+      filename  = "lambda_source/trigger.zip"
+      handler = "lambda_function.lambda_handler"
+      runtime = "python3.9"
+      enable_function_url = true
+      function_url_auth_type = "NONE"
+    }
+  }
+}
+
+/* variable "parameters" {
+  default = [
+    {
+      name  = "foo"
+      type  = "String"
+      value = "bar"
+    },
+    {
+      name  = "another_parameter"
+      type  = "String"
+      value = "example"
+    },
+    # Add more parameters as needed
+  ]
+} */
 
 #variable to add
 # COMMIT_ID, ROLE_ARN?, NAMESPACE/ENVIRONMENT
@@ -167,30 +191,3 @@ variable "parameters-2" {
     # Add more parameters as needed
   }
 } */
-
-variable "lambda" {
-  type = map(object({
-    filename  = string
-    handler = string
-    runtime = string
-    enable_function_url = bool
-    function_url_auth_type = string
-  }))
-  default = {
-    "function-1" = {
-      filename  = "lambda_source/ImpToSecurityHubEKS.zip"
-      handler = "lambda_function.lambda_handler"
-      runtime = "python3.9"
-      enable_function_url = false
-      function_url_auth_type = ""
-    },
-    "function-2" = {
-      filename  = "lambda_source/trigger.zip"
-      handler = "lambda_function.lambda_handler"
-      runtime = "python3.9"
-      enable_function_url = true
-      function_url_auth_type = "NONE"
-    }
-  }
-}
-
