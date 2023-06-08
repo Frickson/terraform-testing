@@ -9,7 +9,5 @@ output "example" {
 
 output "role_arn" {
   description = "IAM Role ARN"
-  value = [for index in module.codebuild:{
-    arn = index.role_arn
-  }]
+  value = local.names
 }
