@@ -25,5 +25,5 @@ module "codebuild" {
   local_cache_modes   = each.value.local_cache_modes
   extra_permissions   = var.extra_permissions
   environment_variables = can(each.value.environment_variables) ? each.value.environment_variables : {}
-  vpc_config = can(each.value.vpc_config) ? var.vpc_config : {}
+  vpc_config = can(each.value.vpc_config) ? each.value.vpc_config : {}
 }
