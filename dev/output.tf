@@ -3,3 +3,6 @@ output "repo" {
   sensitive = true
 }
 
+output "repo11" {
+  value = module.dev_chatbot.name
+}
