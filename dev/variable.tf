@@ -16,3 +16,18 @@ variable "eks_role" {
   default  = "arn:aws:iam::448658572737:role/EksCodeBuildKubectlRole"
   description = "EKS roles from chatbot development account"
 }
+
+locals {
+  arn_by_env = {
+    development = "arn:aws:iam::448658572737:role/DEV"
+    staging = "arn:aws:iam::448658572737:role/STAG"
+    production = "arn:aws:iam::448658572737:role/PROD"
+  }
+  development = {
+    arn_by_env = "arn:aws:iam::448658572737:role/DEV"
+    tag = {
+      env = "developnment"
+    }
+  }
+  arn = local.arn_by_env[var.environment]
+}
